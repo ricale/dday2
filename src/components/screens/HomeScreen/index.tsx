@@ -1,16 +1,15 @@
-import { Button, View } from 'react-native';
+import { Button, StyleSheet, View } from 'react-native';
 
-import Text from 'components/atoms/Text';
-
-import { ScreenProps } from '../../../App';
-import { useAppDispatch, useAppState } from '../../../state';
+import Text from '@/components/atoms/Text';
+import { ScreenProps } from '@/navigation';
+import { useAppDispatch, useAppState } from '@/state';
 
 function HomeScreen({ navigation }: ScreenProps<'Home'>) {
   const { list } = useAppState();
   const dispatch = useAppDispatch();
 
   return (
-    <View style={{ marginTop: 100 }}>
+    <View style={styles.container}>
       <Text>Home Screen</Text>
 
       {list.map(item => (
@@ -69,5 +68,11 @@ function HomeScreen({ navigation }: ScreenProps<'Home'>) {
     </View>
   );
 }
+
+const styles = StyleSheet.create({
+  container: {
+    marginTop: 100,
+  },
+});
 
 export default HomeScreen;

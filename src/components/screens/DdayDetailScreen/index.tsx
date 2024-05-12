@@ -1,9 +1,8 @@
-import { Button, View } from 'react-native';
+import { Button, StyleSheet, View } from 'react-native';
 
-import Text from 'components/atoms/Text';
-
-import { ScreenProps } from '../../../App';
-import { useAppDispatch, useAppState } from '../../../state';
+import Text from '@/components/atoms/Text';
+import { ScreenProps } from '@/navigation';
+import { useAppDispatch, useAppState } from '@/state';
 
 function DdayDetailScreen({ navigation, route }: ScreenProps<'DdayDetail'>) {
   const { id } = route.params;
@@ -16,7 +15,7 @@ function DdayDetailScreen({ navigation, route }: ScreenProps<'DdayDetail'>) {
   }
 
   return (
-    <View style={{ marginTop: 100 }}>
+    <View style={styles.container}>
       <Text>DetailScreen Screen</Text>
 
       <Text>{JSON.stringify(item)}</Text>
@@ -52,5 +51,11 @@ function DdayDetailScreen({ navigation, route }: ScreenProps<'DdayDetail'>) {
     </View>
   );
 }
+
+const styles = StyleSheet.create({
+  container: {
+    marginTop: 100,
+  },
+});
 
 export default DdayDetailScreen;
