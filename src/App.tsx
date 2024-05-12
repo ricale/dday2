@@ -3,9 +3,11 @@ import {
   NativeStackScreenProps,
   createNativeStackNavigator,
 } from '@react-navigation/native-stack';
-import HomeScreen from './components/screens/HomeScreen';
-import { StateProvider } from './state';
+
 import DdayDetailScreen from 'components/screens/DdayDetailScreen';
+import HomeScreen from 'components/screens/HomeScreen';
+
+import { StateProvider } from './state';
 
 type RootStackParamList = {
   Home: undefined;

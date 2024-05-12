@@ -1,7 +1,9 @@
 import { Button, View } from 'react-native';
-import { useAppDispatch, useAppState } from '../../../state';
-import { ScreenProps } from '../../../App';
+
 import Text from 'components/atoms/Text';
+
+import { ScreenProps } from '../../../App';
+import { useAppDispatch, useAppState } from '../../../state';
 
 function HomeScreen({ navigation }: ScreenProps<'Home'>) {
   const { list } = useAppState();

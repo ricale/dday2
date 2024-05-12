@@ -5,6 +5,7 @@ import {
   useContext,
   useReducer,
 } from 'react';
+
 import reducer from './reducer';
 
 const INITIAL_STATE = { list: [], lastId: 0 };
