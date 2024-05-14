@@ -1,9 +1,23 @@
+import { useLayoutEffect, useState } from 'react';
+
 import Navigation from '@/navigation';
-import { StateProvider } from '@/state';
+import { RootState, StateProvider, getStateFromStorage } from '@/state';
 
 function App() {
+  const [initialState, setInitialState] = useState<RootState | null>();
+
+  useLayoutEffect(() => {
+    getStateFromStorage().then(result => {
+      setInitialState(result);
+    });
+  }, []);
+
+  if (initialState === undefined) {
+    return null;
+  }
+
   return (
-    <StateProvider>
+    <StateProvider initialState={initialState}>
       <Navigation />
     </StateProvider>
   );
