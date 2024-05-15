@@ -1,44 +1,22 @@
-import { Button, StyleSheet, View } from 'react-native';
+import { Button } from 'react-native';
 
-import Text from '@/components/atoms/Text';
+import DdayListItem from '@/components/molecules/DdayListItem';
+import ScreenContainer from '@/components/molecules/ScreenContainer';
 import { ScreenProps } from '@/navigation';
-import { useAppDispatch, useAppState } from '@/state';
+import { useAppState } from '@/state';
 
 function HomeScreen({ navigation }: ScreenProps<'Home'>) {
   const { list } = useAppState();
-  const dispatch = useAppDispatch();
 
   return (
-    <View style={styles.container}>
-      <Text>Home Screen</Text>
-
+    <ScreenContainer safeArea>
       {list.map(item => (
-        <View key={item.id}>
-          <Text>{JSON.stringify(item)}</Text>
-          <Button
-            title="go"
-            onPress={() => {
-              navigation.navigate('DdayDetail', { id: item.id });
-            }}
-          />
-          <Button
-            title="edit"
-            onPress={() => {
-              navigation.navigate('EditDday', { id: item.id });
-            }}
-          />
-          <Button
-            title="delete"
-            onPress={() => {
-              dispatch({
-                type: 'DELETE_DDAY_ITEM',
-                payload: {
-                  id: item.id,
-                },
-              });
-            }}
-          />
-        </View>
+        <DdayListItem
+          key={item.id}
+          data={item}
+          onPress={() => navigation.navigate('DdayDetail', { id: item.id })}
+          onPressEdit={() => navigation.navigate('EditDday', { id: item.id })}
+        />
       ))}
 
       <Button
@@ -47,14 +25,8 @@ function HomeScreen({ navigation }: ScreenProps<'Home'>) {
           navigation.navigate('AddDday');
         }}
       />
-    </View>
+    </ScreenContainer>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    marginTop: 100,
-  },
-});
 
 export default HomeScreen;

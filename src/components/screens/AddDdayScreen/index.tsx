@@ -1,6 +1,7 @@
-import { Button, StyleSheet, View } from 'react-native';
+import { Button } from 'react-native';
 
 import DdayForm from '@/components/molecules/DdayForm';
+import ScreenContainer from '@/components/molecules/ScreenContainer';
 import { ScreenProps } from '@/navigation';
 import { DdayItem, useAppDispatch } from '@/state';
 
@@ -16,19 +17,11 @@ function AddDdayScreen({ navigation }: ScreenProps<'AddDday'>) {
   };
 
   return (
-    <View style={styles.container}>
+    <ScreenContainer safeArea>
       <DdayForm onPressSubmit={onPressSubmit} />
       <Button title="back" onPress={() => navigation.goBack()} />
-    </View>
+    </ScreenContainer>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    marginTop: 100,
-    paddingLeft: 16,
-    paddingRight: 16,
-  },
-});
 
 export default AddDdayScreen;

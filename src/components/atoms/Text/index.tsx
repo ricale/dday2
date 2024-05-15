@@ -12,6 +12,7 @@ function Text({ style, ...props }: TextProps) {
 const styles = StyleSheet.create({
   container: {
     color: 'black',
+    fontSize: 16,
   },
 });
 

@@ -1,4 +1,5 @@
 import { useLayoutEffect, useState } from 'react';
+import { StyleSheet, View } from 'react-native';
 
 import Navigation from '@/navigation';
 import { RootState, StateProvider, getStateFromStorage } from '@/state';
@@ -17,10 +18,20 @@ function App() {
   }
 
   return (
-    <StateProvider initialState={initialState}>
-      <Navigation />
-    </StateProvider>
+    <View style={styles.container}>
+      <StateProvider initialState={initialState}>
+        <Navigation />
+      </StateProvider>
+    </View>
   );
 }
+
+const styles = StyleSheet.create({
+  container: {
+    backgroundColor: 'lightgray',
+    width: '100%',
+    height: '100%',
+  },
+});
 
 export default App;

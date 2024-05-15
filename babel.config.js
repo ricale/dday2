@@ -10,6 +10,7 @@ module.exports = {
           '@/lib': './src/lib',
           '@/navigation': './src/navigation',
           '@/state': './src/state',
+          '@/utils': './src/utils',
         },
       },
     ],
