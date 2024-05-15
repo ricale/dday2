@@ -44,4 +44,4 @@ export function useAppDispatch() {
 }
 
 export { default as getStateFromStorage } from './utils/getStateFromStorage';
-export type { RootState };
+export type * from './state';

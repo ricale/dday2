@@ -1,10 +1,12 @@
+export type DdayItem = {
+  id: number;
+  name: string;
+  year: number;
+  month: number;
+  day: number;
+};
+
 export type RootState = {
-  list: {
-    id: number;
-    name: string;
-    year: number;
-    month: number;
-    day: number;
-  }[];
+  list: DdayItem[];
   lastId: number;
 };

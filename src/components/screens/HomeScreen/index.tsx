@@ -24,16 +24,7 @@ function HomeScreen({ navigation }: ScreenProps<'Home'>) {
           <Button
             title="edit"
             onPress={() => {
-              dispatch({
-                type: 'UPDATE_DDAY_ITEM',
-                payload: {
-                  id: item.id,
-                  day: item.day + 1,
-                  month: item.month + 1,
-                  year: item.year + 1,
-                  name: 'test',
-                },
-              });
+              navigation.navigate('EditDday', { id: item.id });
             }}
           />
           <Button
@@ -45,24 +36,15 @@ function HomeScreen({ navigation }: ScreenProps<'Home'>) {
                   id: item.id,
                 },
               });
-              navigation.navigate('Home');
             }}
           />
         </View>
       ))}
 
       <Button
-        title="test"
+        title="add"
         onPress={() => {
-          dispatch({
-            type: 'ADD_DDAY_ITEM',
-            payload: {
-              day: 1,
-              month: 1,
-              year: 2000,
-              name: 'test',
-            },
-          });
+          navigation.navigate('AddDday');
         }}
       />
     </View>
