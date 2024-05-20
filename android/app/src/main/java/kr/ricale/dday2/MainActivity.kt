@@ -1,4 +1,4 @@
-package com.dday2
+package kr.ricale.dday2
 
 import com.facebook.react.ReactActivity
 import com.facebook.react.ReactActivityDelegate

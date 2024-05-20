@@ -1,4 +1,4 @@
-package com.dday2
+package kr.ricale.dday2
 
 import android.app.Application
 import com.facebook.react.PackageList
@@ -20,6 +20,7 @@ class MainApplication : Application(), ReactApplication {
             PackageList(this).packages.apply {
               // Packages that cannot be autolinked yet can be added manually here, for example:
               // add(MyReactNativePackage())
+                add(OngoingNotificationPackage())
             }
 
         override fun getJSMainModuleName(): String = "index"

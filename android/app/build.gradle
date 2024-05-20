@@ -74,9 +74,9 @@ android {
     buildToolsVersion rootProject.ext.buildToolsVersion
     compileSdk rootProject.ext.compileSdkVersion
 
-    namespace "com.dday2"
+    namespace "kr.ricale.dday2"
     defaultConfig {
-        applicationId "com.dday2"
+        applicationId "kr.ricale.dday2"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1
