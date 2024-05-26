@@ -50,6 +50,20 @@ const reducer: MyReducer = (state, action) => {
         list: newList,
       };
     }
+
+    case 'SET_ONGOING_NOTIFICATION':
+      return {
+        ...state,
+        ongoingId: action.payload.id,
+      };
+
+    case 'RELEASE_ONGOING_NOTIFICATION': {
+      return {
+        ...state,
+        ongoingId: undefined,
+      };
+    }
+
     default:
       return state;
   }

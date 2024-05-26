@@ -2,6 +2,7 @@ import { Button, StyleSheet, View } from 'react-native';
 
 import Text from '@/components/atoms/Text';
 import ScreenContainer from '@/components/molecules/ScreenContainer';
+import OngoingNotification from '@/lib/OngoingNotification';
 import day from '@/lib/day';
 import { ScreenProps } from '@/navigation';
 import { useAppDispatch, useAppState } from '@/state';
@@ -9,7 +10,7 @@ import getDiffString from '@/utils/getDiffString';
 import useSafeArea from '@/utils/useSafeArea';
 
 function DdayDetailScreen({ navigation, route }: ScreenProps<'DdayDetail'>) {
-  const { list } = useAppState();
+  const { list, ongoingId } = useAppState();
   const item = list.find(it => it.id === route.params.id);
   const dispatch = useAppDispatch();
   const { bottom } = useSafeArea();
@@ -17,6 +18,19 @@ function DdayDetailScreen({ navigation, route }: ScreenProps<'DdayDetail'>) {
   if (!item) {
     throw new Error(`[DdayDetailScreen] item not exists: ${route.params.id}`);
   }
+
+  const onPressSetNotification = () => {
+    if (ongoingId) {
+      dispatch({ type: 'RELEASE_ONGOING_NOTIFICATION' });
+      OngoingNotification.release();
+    } else {
+      dispatch({
+        type: 'SET_ONGOING_NOTIFICATION',
+        payload: { id: item.id },
+      });
+      OngoingNotification.set(item.name, item.year, item.month, item.day);
+    }
+  };
 
   const onPressEdit = () => {
     dispatch({
@@ -58,6 +72,7 @@ function DdayDetailScreen({ navigation, route }: ScreenProps<'DdayDetail'>) {
       </View>
 
       <View style={[styles.controller, { bottom }]}>
+        <Button title="noti" onPress={onPressSetNotification} />
         <Button title="edit" onPress={onPressEdit} />
         <Button title="delete" onPress={onPressDelete} />
         <Button title="back" onPress={onPressBack} />

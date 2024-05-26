@@ -6,6 +6,11 @@ import android.content.Intent
 
 class BootUpReceiver : BroadcastReceiver() {
     override fun onReceive(context: Context?, intent: Intent?) {
-        context?.startService(Intent(context, OngoingNotificationService::class.java))
+        if(context != null) {
+            DdayUtil.init(context)
+            if(DdayUtil.hasOngoing()) {
+                context.startService(Intent(context, OngoingNotificationService::class.java))
+            }
+        }
     }
 }

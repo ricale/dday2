@@ -9,4 +9,5 @@ export type DdayItem = {
 export type RootState = {
   list: DdayItem[];
   lastId: number;
+  ongoingId?: number;
 };

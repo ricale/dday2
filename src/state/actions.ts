@@ -1,7 +1,12 @@
-type Action<TypeName extends string, Payload extends {}> = {
-  type: TypeName;
-  payload: Payload;
-};
+type Action<
+  TypeName extends string,
+  Payload extends {} | undefined = undefined,
+> = Payload extends {}
+  ? {
+      type: TypeName;
+      payload: Payload;
+    }
+  : { type: TypeName };
 
 type AddDdayItemAction = Action<
   'ADD_DDAY_ITEM',
@@ -31,7 +36,18 @@ type DeleteDdayItemAction = Action<
   }
 >;
 
+type SetOngoingNotificationAction = Action<
+  'SET_ONGOING_NOTIFICATION',
+  {
+    id: number;
+  }
+>;
+
+type ReleaseOngoingNotificationAction = Action<'RELEASE_ONGOING_NOTIFICATION'>;
+
 export type AppAction =
   | AddDdayItemAction
   | UpdateDdayItemAction
-  | DeleteDdayItemAction;
+  | DeleteDdayItemAction
+  | SetOngoingNotificationAction
+  | ReleaseOngoingNotificationAction;
