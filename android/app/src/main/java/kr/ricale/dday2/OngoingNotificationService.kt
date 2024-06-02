@@ -11,8 +11,15 @@ class OngoingNotificationService : Service() {
     }
 
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
-        val notification = DdayNotification.getOngoingNotification(applicationContext)
-        startForeground(DdayNotification.SERVICE_NOTIFICATION_ID, notification)
+        val content = DdayUtil.getOngoingMessageContent()
+        if(content != null) {
+            val notification = DdayNotification.getOngoingNotification(
+                applicationContext,
+                content.first,
+                content.second,
+            )
+            startForeground(DdayNotification.SERVICE_NOTIFICATION_ID, notification)
+        }
         return START_STICKY
     }
 

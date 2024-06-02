@@ -3,6 +3,7 @@ package kr.ricale.dday2
 import android.content.Context
 import org.json.JSONObject
 import java.time.LocalDate
+import java.time.LocalDateTime
 import java.time.temporal.ChronoUnit
 
 object DdayUtil {
@@ -33,29 +34,37 @@ object DdayUtil {
         return Storage.get(STORAGE_KEY) != null
     }
 
-    private fun getRemainingDays(date: LocalDate): Long {
-        return ChronoUnit.DAYS.between(date, LocalDate.now())
+    fun getOngoingMessageContent(
+        name: String,
+        year: Int,
+        month: Int,
+        day: Int,
+    ): Pair<String, String> {
+        var diffToday = ChronoUnit.DAYS.between(LocalDate.of(year, month, day), LocalDate.now())
+        if(diffToday >= 0) {
+            diffToday += 1
+        }
+
+        val testString = "%d:%d".format(LocalDateTime.now().minute, LocalDateTime.now().second)
+
+        return Pair(
+            name,
+            if(diffToday < 0) {
+                "D-%d".format(diffToday * -1)
+            } else {
+                "D+%d %s".format(diffToday, testString)
+            }
+        )
     }
 
     fun getOngoingMessageContent(): Pair<String, String>? {
         val obj = Storage.get(STORAGE_KEY) ?: return null
 
+        val name = obj.getString(VALUE_KEY_NAME)
         val year = obj.getInt(VALUE_KEY_YEAR)
         val month = obj.getInt(VALUE_KEY_MONTH)
         val day = obj.getInt(VALUE_KEY_DAY)
 
-        var diffToday = getRemainingDays(LocalDate.of(year, month, day))
-        if(diffToday >= 0) {
-            diffToday += 1
-        }
-
-        return Pair(
-            obj.getString(VALUE_KEY_NAME),
-            if(diffToday < 0) {
-                "D-%d".format(diffToday * -1)
-            } else {
-                "D+%d".format(diffToday)
-            }
-        )
+        return getOngoingMessageContent(name, year, month, day)
     }
 }

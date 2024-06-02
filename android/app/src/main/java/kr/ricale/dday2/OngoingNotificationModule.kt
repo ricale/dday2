@@ -18,14 +18,16 @@ class OngoingNotificationModule(private val reactContext: ReactApplicationContex
     @ReactMethod
     fun set(name: String, year: Int, month: Int, day: Int) {
         DdayUtil.setOngoing(name, year, month, day)
-//        DdayNotification.runOngoingNotification(reactContext)
-        reactContext.startService(Intent(reactContext, OngoingNotificationService::class.java))
+        val content = DdayUtil.getOngoingMessageContent(name, year, month, day)
+        DdayNotification.runOngoingNotification(reactContext, content.first, content.second)
+        DdayUpdater.set(reactContext)
     }
 
     @ReactMethod
     fun release() {
         DdayUtil.removeOngoing()
-//        DdayNotification.releaseOngoingNotification(reactContext)
+        DdayNotification.releaseOngoingNotification(reactContext)
+        DdayUpdater.cancel(reactContext)
         reactContext.stopService(Intent(reactContext, OngoingNotificationService::class.java))
     }
 }
